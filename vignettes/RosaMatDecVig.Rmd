@@ -1,0 +1,70 @@
+---
+title: "The RosaMatDec Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The RosaMatDec Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(RosaMatDec)
+```
+
+# Introduction
+
+This package creates many items from a 3x2 matrix for OU course MATH5793. There is also an S3 method for plotting the data matrix in 2D.
+
+# Example `myMatdec()`
+
+First, we need a matrix. So let $\mathbf{M}$ be a $3x2$ matrix such as
+
+$$
+\mathbf{M} = 
+  \begin{bmatrix}
+    4 & 1 \\
+    -1 & 3 \\
+    3 & 5 \\
+  \end{bmatrix}
+$$
+
+Define the matrix in `R`
+
+```{r}
+M <- matrix(c(4,1,-1,3,3,5), nrow = 3, ncol = 2, byrow = TRUE)
+M
+```
+
+```{r}
+m <- myMatdec(X = M)
+m
+```
+
+The following explains each item:
+
+  - $X$ - The original matrix
+  - $xBar$ - The mean vector
+  - $x1, \ x2, \ x3$ - Transverse vectors of the rows
+  - $y1 \ \& \ y2$ - Vectors of the columns
+  - $d1 \ \& \ d2$ - Deviation vectors
+  - $Ld1 \ \& \ Ld2$ - Length of the deviation vectors
+  - $s11, \ s22, \ \& \ s12$ - Variances of $d1$ and $d2$, respectively, and the covariance.
+  - $r12$ - Correlation coefficient 
+  - $Theta$ - angle between the deviation vectors
+
+# Example `myMatdec.plot2d()`
+
+The package also contains an `S3 method` for plotting the original data matrix in $2D$.
+
+```{r, fig.align='center', fig.width=7, fig.height=5}
+myMatdec.plot2d(X = M)
+```
+
+
